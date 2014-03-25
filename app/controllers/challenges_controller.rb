@@ -5,7 +5,7 @@ class ChallengesController < ApplicationController
   # GET /challenges
   # GET /challenges.json
   def index
-    @challenges = Challenge.all
+    @challenges = Challenge.all.includes(:user)
   end
 
   # GET /challenges/1
