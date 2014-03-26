@@ -30,9 +30,7 @@ describe ChallengesController do
     end
 
     context 'with an authenticated user' do
-      before(:each) do
-        sign_in(:user, create(:user))
-      end
+      include_context 'authenticated user'
 
       it 'assigns a new challenge as @challenge' do
         get :new
@@ -41,13 +39,17 @@ describe ChallengesController do
     end
   end
 
-  #describe "GET edit" do
-  #  it "assigns the requested challenge as @challenge" do
-  #    challenge = create(:challenge)
-  #    get :edit, {:id => challenge.to_param}
-  #    assigns(:challenge).should eq(challenge)
-  #  end
-  #end
+  describe 'GET edit' do
+    context 'with an authenticated user' do
+      include_context 'authenticated user'
+
+      it 'assigns the requested challenge as @challenge' do
+        challenge = create(:challenge)
+        get :edit, {:id => challenge.to_param}
+        assigns(:challenge).should eq(challenge)
+      end
+    end
+  end
 
   describe 'POST create' do
     context 'without an authenticated user' do
@@ -59,11 +61,7 @@ describe ChallengesController do
     end
 
     context 'with an authenticated user' do
-      let(:user) { create(:user) }
-
-      before(:each) do
-        sign_in(:user, user)
-      end
+      include_context 'authenticated user'
 
       context 'with valid params' do
         it 'creates a new Challenge' do
@@ -91,56 +89,52 @@ describe ChallengesController do
 
       context 'with invalid params' do
         it 'raises a ParameterMissing error' do
-          expect{ post(:create, {:challenge => {}}) }.to raise_error ActionController::ParameterMissing
+          expect { post(:create, {:challenge => {}}) }.to raise_error ActionController::ParameterMissing
         end
       end
     end
   end
 
-  #describe "PUT update" do
-  #  describe "with valid params" do
-  #    it "updates the requested challenge" do
-  #      challenge = create(:challenge)
-  #      # Assuming there are no other challenges in the database, this
-  #      # specifies that the Challenge created on the previous line
-  #      # receives the :update_attributes message with whatever params are
-  #      # submitted in the request.
-  #      Challenge.any_instance.should_receive(:update).with({ "these" => "params" })
-  #      put :update, {:id => challenge.to_param, :challenge => { "these" => "params" }}
-  #    end
-  #
-  #    it "assigns the requested challenge as @challenge" do
-  #      challenge = create(:challenge)
-  #      put :update, {:id => challenge.to_param, :challenge => valid_attributes}
-  #      assigns(:challenge).should eq(challenge)
-  #    end
-  #
-  #    it "redirects to the challenge" do
-  #      challenge = create(:challenge)
-  #      put :update, {:id => challenge.to_param, :challenge => valid_attributes}
-  #      response.should redirect_to(challenge)
-  #    end
-  #  end
-  #
-  #  describe "with invalid params" do
-  #    it "assigns the challenge as @challenge" do
-  #      challenge = create(:challenge)
-  #      # Trigger the behavior that occurs when invalid params are submitted
-  #      Challenge.any_instance.stub(:save).and_return(false)
-  #      put :update, {:id => challenge.to_param, :challenge => {  }}
-  #      assigns(:challenge).should eq(challenge)
-  #    end
-  #
-  #    it "re-renders the 'edit' template" do
-  #      challenge = create(:challenge)
-  #      # Trigger the behavior that occurs when invalid params are submitted
-  #      Challenge.any_instance.stub(:save).and_return(false)
-  #      put :update, {:id => challenge.to_param, :challenge => {  }}
-  #      response.should render_template("edit")
-  #    end
-  #  end
-  #end
-  #
+  describe 'PUT update' do
+    context 'with an authenticated user' do
+      include_context 'authenticated user'
+
+      describe 'with valid params' do
+        it 'updates the requested challenge' do
+          challenge = create(:challenge)
+          # Assuming there are no other challenges in the database, this
+          # specifies that the Challenge created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          params = {'description' => 'params'}
+          Challenge.any_instance.should_receive(:update).with(params)
+          put :update, {:id => challenge.to_param, :challenge => params}
+        end
+
+        it 'assigns the requested challenge as @challenge' do
+          challenge = create(:challenge)
+          put :update, {:id => challenge.to_param, :challenge => valid_attributes}
+          assigns(:challenge).should eq(challenge)
+        end
+
+        it 'redirects to the challenge' do
+          challenge = create(:challenge)
+          put :update, {:id => challenge.to_param, :challenge => valid_attributes}
+          response.should redirect_to(challenge)
+        end
+      end
+
+      describe 'with invalid params' do
+        it 'assigns the challenge as @challenge' do
+          challenge = create(:challenge)
+          # Trigger the behavior that occurs when invalid params are submitted
+          Challenge.any_instance.stub(:save).and_return(false)
+          expect { put :update, {:id => challenge.to_param, :challenge => {}} }.to raise_error ActionController::ParameterMissing
+        end
+      end
+    end
+  end
+
   #describe "DELETE destroy" do
   #  it "destroys the requested challenge" do
   #    challenge = create(:challenge)

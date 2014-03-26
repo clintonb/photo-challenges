@@ -1,14 +1,25 @@
 <% title 'Challenges' %>
 
-<ul>
+<div class="page-header">
+  <div class="pull-right">
+    <%= link_to 'Create New Challenge', new_challenge_path, :class => 'btn btn-primary', :role => 'button' %>
+  </div>
+  <h1><%= content_for(:title) %></h1>
+</div>
+
+<div class="challenges">
   <% @challenges.each do |challenge| %>
-    <li>
-      <%= challenge.id %>: <%= link_to challenge.description, challenge %> (<%= challenge.photos.count %>)
-    </li>
+    <div class="challenge row margin-bottom">
+      <div class="counts col-xs-2 text-center">
+        <a class="vote-link" href="#">
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        <%= challenge.photos.count %>
+      </div>
+      <div class="detail col-xs-10">
+        <div class="description"><%= link_to challenge.description, challenge %></div>
+        <div class="text-muted small">Submitted by <%= challenge.user.get_display_name() %></div>
+      </div>
+    </div>
   <% end %>
-</ul>
-
-
-<br>
-
-<%= link_to 'New Challenge', new_challenge_path %>
+</div>

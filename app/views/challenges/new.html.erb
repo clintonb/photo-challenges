@@ -1,5 +1,7 @@
-<h1>New challenge</h1>
+<% title 'Create New Challenge' %>
+
+<div class="page-header">
+  <h1><%= content_for(:title) %></h1>
+</div>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', challenges_path %>

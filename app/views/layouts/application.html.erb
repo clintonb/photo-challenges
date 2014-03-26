@@ -2,15 +2,17 @@
 <html>
 <head>
   <title><%= "#{content_for(:title)} | " if content_for?(:title) %>Photo Challenge</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <%= render partial: 'shared/navbar' %>
-<%= render partial: 'shared/messages', flash: flash %>
 
-<%= yield %>
+<div class="container">
+  <%= render partial: 'shared/messages', flash: flash %>
+  <%= yield %>
+</div>
 
 </body>
 </html>

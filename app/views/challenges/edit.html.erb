@@ -1,6 +1,7 @@
-<h1>Editing challenge</h1>
+<% title "Edit Challenge ##{@challenge.id}" %>
+
+<div class="page-header">
+  <h1><%= content_for(:title) %></h1>
+</div>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @challenge %> |
-<%= link_to 'Back', challenges_path %>

@@ -33,6 +33,7 @@ group :doc do
 end
 
 gem 'devise'
+gem 'bootstrap_form'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'

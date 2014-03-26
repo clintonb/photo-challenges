@@ -19,8 +19,8 @@ class ChallengesController < ApplicationController
   end
 
   # GET /challenges/1/edit
-  #def edit
-  #end
+  def edit
+  end
 
   # POST /challenges
   # POST /challenges.json
@@ -41,17 +41,17 @@ class ChallengesController < ApplicationController
 
   # PATCH/PUT /challenges/1
   # PATCH/PUT /challenges/1.json
-  #def update
-  #  respond_to do |format|
-  #    if @challenge.update(challenge_params)
-  #      format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
-  #      format.json { head :no_content }
-  #    else
-  #      format.html { render action: 'edit' }
-  #      format.json { render json: @challenge.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
+  def update
+    respond_to do |format|
+      if @challenge.update(challenge_params)
+        format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @challenge.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /challenges/1
   # DELETE /challenges/1.json
@@ -66,7 +66,7 @@ class ChallengesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_challenge
-      @challenge = Challenge.find(params[:id])
+      @challenge = Challenge.includes(:user).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

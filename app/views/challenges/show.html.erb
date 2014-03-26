@@ -1,4 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% title "Challenge ##{@challenge.id}" %>
 
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
+<div class="jumbotron">
+  <h1>Challenge #<%= @challenge.id %></h1>
+
+  <div class="text-muted margin-bottom-large">Submitted by <%= @challenge.user.get_display_name() %></div>
+  <p><%= @challenge.description %></p>
+  <% if challenge_editable(@challenge) %>
+    <%= link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn btn-primary', :role => 'button' %>
+  <% end %>
+</div>
+
+<% if @challenge.photos.any? %>
+  <div class="row">
+    <% @challenge.photos.each do |photo| %>
+      <div class="col-xs-3">
+        <a href="#" class="thumbnail">
+          <img src="<%= photo.url %>?<%= rand(100) %>" alt="...">
+        </a>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    No photos have been posted for this challenge.
+  </div>
+<% end %>
