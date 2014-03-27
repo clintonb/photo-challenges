@@ -3,7 +3,7 @@
 <div class="jumbotron">
   <h1>Challenge #<%= @challenge.id %></h1>
 
-  <div class="text-muted margin-bottom-large">Submitted by <%= @challenge.user.get_display_name() %></div>
+  <div class="text-muted margin-bottom-large">Submitted by <%= @challenge.user.display_name %></div>
   <p><%= @challenge.description %></p>
   <% if challenge_editable(@challenge) %>
     <%= link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn btn-primary', :role => 'button' %>

@@ -21,12 +21,12 @@ describe User do
     expect(user.email).to eq email.downcase
   end
 
-  describe '#get_display_name' do
+  describe '#display_name' do
     context 'with display_name set' do
       let(:user) { build(:user, display_name: Faker::Name.name) }
 
       it 'returns display_name' do
-        expect(user.get_display_name()).to eq user.display_name
+        expect(user.display_name).to eq user.display_name
       end
     end
 
@@ -35,7 +35,7 @@ describe User do
         let(:user) { build(:user, display_name: nil, last_name: nil) }
 
         it 'returns first_name' do
-          expect(user.get_display_name()).to eq user.first_name
+          expect(user.display_name).to eq user.first_name
         end
       end
 
@@ -43,7 +43,7 @@ describe User do
         let(:user) { build(:user, display_name: nil, last_name: Faker::Name.last_name) }
 
         it 'returns "first_name last_name"' do
-          expect(user.get_display_name()).to eq "#{user.first_name} #{user.last_name}"
+          expect(user.display_name).to eq "#{user.first_name} #{user.last_name}"
         end
       end
     end
