@@ -16,3 +16,6 @@
 /tmp
 
 .idea
+
+config/app.yml
+config/database.yml

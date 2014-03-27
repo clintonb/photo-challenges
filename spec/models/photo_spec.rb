@@ -2,11 +2,15 @@ require 'spec_helper'
 
 describe Photo do
   it 'has a valid factory' do
-    expect(create(:photo)).to be_valid
+    photo = create(:photo)
+    expect(photo.challenges.count).to be > 0
+    expect(photo).to be_valid
   end
 
   it 'is invalid without a challenge' do
-    expect(build(:photo, challenge: nil)).to_not be_valid
+    photo = build(:photo)
+    expect(photo.challenges.count).to eq 0
+    expect(photo).to_not be_valid
   end
 
   it 'is invalid without a user' do

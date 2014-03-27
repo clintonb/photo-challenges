@@ -1,7 +1,8 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :daily_challenge do
+  factory :challenges_photos do
     association :challenge
+    association :photo
   end
 end
