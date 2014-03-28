@@ -15,7 +15,7 @@
     <% @challenge.photos.each do |photo| %>
       <div class="col-xs-3">
         <a href="#" class="thumbnail">
-          <img src="<%= photo.url %>?<%= rand(100) %>" alt="...">
+          <img src="<%= photo.url %>">
         </a>
       </div>
     <% end %>
