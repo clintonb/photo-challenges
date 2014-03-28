@@ -7,9 +7,12 @@ describe OmniauthCallbacksController do
 
   describe :twitter do
     let!(:twitter_user_id) { Faker::Number.number(10) }
+    let(:name) { Faker::Name.name }
+    let(:username) { Faker::Internet.user_name }
+    let(:auth_env) { {'provider' => 'twitter', 'uid' => twitter_user_id, 'credentials' => {'token' => '', 'token_secret' => ''}, 'extra' => {'raw_info' => {'name' => name, 'screen_name' => username}}} }
 
     before(:each) do
-      request.env['omniauth.auth'] = {'provider' => 'twitter', 'uid' => twitter_user_id, 'credentials' => {'token' => '', 'token_secret' => ''}}
+      request.env['omniauth.auth'] = auth_env
     end
 
     subject(:response) { get :twitter }
@@ -48,7 +51,14 @@ describe OmniauthCallbacksController do
     end
 
     context 'new user' do
+      it { should redirect_to new_user_registration_path }
 
+      it 'should set session keys' do
+        response
+
+        expect(session[:omniauth]).to eq(auth_env.except('extra'))
+        expect(session[:extra]).to eq({first_name: name, username: username})
+      end
     end
   end
 end

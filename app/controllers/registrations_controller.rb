@@ -1,12 +1,23 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
 
+  def create
+    super
+    unless @user.new_record?
+      session[:omniauth] = nil
+      session[:extra] = nil
+    end
+  end
+
   protected
 
   def build_resource(*args)
     super
-    if session[:omniauth]
-      @user.apply_omniauth(session[:omniauth])
+    omni = session[:omniauth]
+    if omni
+      @user.first_name = session[:extra][:first_name]
+      @user.username = session[:extra][:username]
+      @user.apply_omniauth(omni)
       @user.valid?
     end
   end

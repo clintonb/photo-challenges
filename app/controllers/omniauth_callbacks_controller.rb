@@ -16,17 +16,11 @@ class OmniauthCallbacksController< Devise::OmniauthCallbacksController
       flash[:notice] = "Authentication successful."
       sign_in_and_redirect current_user
     else
-      # New user
-      user = User.new
-      user.apply_omniauth(omni)
-
-      if user.save
-        flash[:notice] = 'Logged in.'
-        sign_in_and_redirect User.find(user.id)
-      else
-        session[:omniauth] = omni.except('extra')
-        redirect_to new_user_registration_path
-      end
+      # New user. Add info to cookies (to pre-populate sign up form) and redirect to the sign up form.
+      session[:omniauth] = omni.except('extra')
+      raw_info = omni['extra']['raw_info']
+      session[:extra] = {first_name: raw_info['name'], username: raw_info['screen_name']}
+      redirect_to new_user_registration_path
     end
   end
 end
