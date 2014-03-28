@@ -22,5 +22,9 @@ module PhotoChallenge
 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.autoload_paths += %W(#{Rails.root}/lib)
+
+    # Disable asset generation
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
   end
 end
