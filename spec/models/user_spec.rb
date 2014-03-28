@@ -56,7 +56,7 @@ describe User do
     subject(:user) { User.find_or_create_from_tweet!(tweet) }
 
     it { should be_a(User) }
-    its(:twitter_id) { should eq(twitter_user_id.to_s) }
+    its('authentications.first.uid') { should eq(twitter_user_id.to_s) }
 
     context 'non-existent user' do
       its(:first_name) { should eq(name) }
@@ -65,7 +65,12 @@ describe User do
 
     context 'user exists' do
       let(:password) { 'password' }
-      let!(:existing_user) { create(:user, twitter_id: twitter_user_id.to_s, encrypted_password: password) }
+      let!(:existing_user) do
+        user = create(:authentication, uid: twitter_user_id).user
+        user.encrypted_password = password
+        user.save
+        user
+      end
 
       it { should eq(existing_user) }
       its(:encrypted_password) { should eq(password) }

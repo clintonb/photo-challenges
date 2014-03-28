@@ -108,7 +108,7 @@ describe Helpers do
       its(:data_source_external_id) { should eq(tweet.id) }
 
       context 'existing user' do
-        let!(:existing_user) { create(:user, twitter_id: twitter_user_id.to_s) }
+        let!(:existing_user) { create(:authentication, provider:'twitter',uid: twitter_user_id).user }
 
         its(:user) { should eq(existing_user) }
       end

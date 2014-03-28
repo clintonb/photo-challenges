@@ -33,6 +33,9 @@ group :doc do
 end
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+
 gem 'bootstrap_form'
 
 group :development, :test do

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326204627) do
+ActiveRecord::Schema.define(version: 20140327045704) do
+
+  create_table "authentications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "token_secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id"
 
   create_table "challenges", force: true do |t|
     t.string   "description", null: false
@@ -76,12 +89,10 @@ ActiveRecord::Schema.define(version: 20140326204627) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "twitter_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["twitter_id"], name: "index_users_on_twitter_id", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
