@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140326204627) do
   create_table "users", force: true do |t|
     t.string   "first_name",             default: "", null: false
     t.string   "last_name"
-    t.string   "display_name"
+    t.string   "username"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -82,5 +82,6 @@ ActiveRecord::Schema.define(version: 20140326204627) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["twitter_id"], name: "index_users_on_twitter_id", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end

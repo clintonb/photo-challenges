@@ -22,17 +22,17 @@ describe User do
   end
 
   describe '#display_name' do
-    context 'with display_name set' do
-      let(:user) { build(:user, display_name: Faker::Name.name) }
+    context 'with username set' do
+      let(:user) { build(:user, username: Faker::Name.name) }
 
-      it 'returns display_name' do
-        expect(user.display_name).to eq user.display_name
+      it 'returns username' do
+        expect(user.display_name).to eq user.username
       end
     end
 
-    context 'without display_name set' do
+    context 'without username set' do
       context 'without last_name set' do
-        let(:user) { build(:user, display_name: nil, last_name: nil) }
+        let(:user) { build(:user, username: nil, last_name: nil) }
 
         it 'returns first_name' do
           expect(user.display_name).to eq user.first_name
@@ -40,7 +40,7 @@ describe User do
       end
 
       context 'with last_name set' do
-        let(:user) { build(:user, display_name: nil, last_name: Faker::Name.last_name) }
+        let(:user) { build(:user, username: nil, last_name: Faker::Name.last_name) }
 
         it 'returns "first_name last_name"' do
           expect(user.display_name).to eq "#{user.first_name} #{user.last_name}"
