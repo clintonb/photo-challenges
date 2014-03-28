@@ -1,0 +1,15 @@
+<% title @user.display_name %>
+
+<div class="page-header">
+  <div class="pull-right">
+    <%= link_to 'Edit Profile', '#', :class => 'btn btn-primary disabled', :role => 'button' %>
+  </div>
+  <h1><%= content_for(:title) %></h1>
+</div>
+
+<% @user.photos.each do |photo| %>
+  <%= photo.id %>
+  <img src="<%= photo.url %>">
+<% end %>
+
+<%= link_to('Link to Twitter', omniauth_authorize_path('user', 'twitter')) %>

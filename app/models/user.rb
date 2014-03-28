@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authentications
+  has_many :photos
   validates :email, :presence => true
   validates :first_name, :presence => true
 
@@ -29,5 +30,10 @@ class User < ActiveRecord::Base
 
   def apply_omniauth(omni)
     authentications.build(:provider => omni['provider'], :uid => omni['uid'], :token => omni['credentials']['token'], :token_secret => omni['credentials']['secret'])
+  end
+
+  def profile_image_url(size=30)
+    hash = Digest::MD5.hexdigest(email.downcase)
+    "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
   end
 end

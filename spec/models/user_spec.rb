@@ -76,4 +76,9 @@ describe User do
       its(:encrypted_password) { should eq(password) }
     end
   end
+
+  describe '#profile_image_url' do
+    subject(:user) { create(:user) }
+    its(:profile_image_url) { should eq "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}?s=#{30}&d=mm" }
+  end
 end

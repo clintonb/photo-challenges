@@ -6,5 +6,6 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     password 'password'
+    username { Faker::Internet.user_name }
   end
 end

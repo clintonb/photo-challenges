@@ -18,7 +18,7 @@
       </div>
       <div class="detail col-xs-10">
         <div class="description"><%= link_to challenge.description, challenge %></div>
-        <div class="text-muted small">Submitted by <%= challenge.user.display_name %></div>
+        <div class="text-muted small">Submitted by <%= link_to challenge.user.display_name, challenge.user %></div>
       </div>
     </div>
   <% end %>

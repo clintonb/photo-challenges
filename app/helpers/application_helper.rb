@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 module ApplicationHelper
   def title(page_title)
     content_for :title, page_title.to_s
@@ -17,13 +15,6 @@ module ApplicationHelper
         'alert-info' # Blue
       else
         flash_type.to_s
-    end
-  end
-
-  def gravatar_url(user, size=30)
-    if user
-      hash = Digest::MD5.hexdigest(user.email.downcase)
-      "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
     end
   end
 end
