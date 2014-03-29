@@ -7,6 +7,8 @@
   <h1><%= content_for(:title) %></h1>
 </div>
 
+<%= @user.inspect() %>
+
 <% @user.photos.each do |photo| %>
   <%= photo.id %>
   <img src="<%= photo.url %>">

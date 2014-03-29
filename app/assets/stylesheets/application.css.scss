@@ -26,6 +26,10 @@
       .vote-link {
         color: inherit;
         display: block;
+
+        &.voted {
+          color: #39b3d7;
+        }
       }
     }
 

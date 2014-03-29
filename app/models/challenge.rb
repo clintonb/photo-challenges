@@ -1,4 +1,5 @@
 class Challenge < ActiveRecord::Base
+  acts_as_votable
   belongs_to :user
   has_and_belongs_to_many :photos
   validates :description, :presence => true

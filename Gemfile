@@ -45,3 +45,4 @@ group :development, :test do
 end
 
 gem 'tweetstream'
+gem 'acts_as_votable'

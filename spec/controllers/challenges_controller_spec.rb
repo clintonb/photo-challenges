@@ -5,11 +5,26 @@ describe ChallengesController do
   let(:valid_attributes) { attributes_for(:challenge) }
 
   describe 'GET index' do
-    it 'assigns all challenges as @challenges' do
+    it 'assigns @challenges and @voted' do
       challenges = create_list(:challenge, 5)
       get :index
       assigns(:challenges).should eq(challenges)
+      assigns(:voted).should match_array([])
     end
+
+    context 'with an authenticated user' do
+      include_context 'authenticated user'
+
+      it 'assigns @voted with ids of challenges voted up by the current user' do
+        challenges = create_list(:challenge, 5)
+        challenge = challenges[0]
+        challenge.liked_by user
+        get :index
+
+        assigns(:voted).should match_array([challenge.id])
+      end
+    end
+
   end
 
   describe 'GET show' do
@@ -131,6 +146,37 @@ describe ChallengesController do
           Challenge.any_instance.stub(:save).and_return(false)
           expect { put :update, {:id => challenge.to_param, :challenge => {}} }.to raise_error ActionController::ParameterMissing
         end
+      end
+    end
+  end
+
+  describe 'PUT vote' do
+    let(:challenge) { create(:challenge) }
+    subject(:response) { put :vote, {id: challenge.to_param, format: :json} }
+
+    its(:status) { should eq 401 }
+
+    context 'with an authenticated user' do
+      include_context 'authenticated user'
+
+      its(:status) { should eq 200 }
+      its(:body) { should eq({msg: 'Vote registered'}.to_json) }
+
+      it 'should register a vote for the user' do
+        response
+
+        expect(challenge.votes.up.by_type(User).voters.count).to eq(1)
+        expect(challenge.votes.up.by_type(User).voters.first).to eq(user)
+        expect(user.get_up_voted(Challenge).first).to eq(challenge)
+      end
+
+      it 'should register only one vote after successive calls' do
+        response
+        response = put :vote, {id: challenge.to_param, format: :json}
+
+        expect(challenge.votes.up.by_type(User).voters.count).to eq(1)
+        expect(response.body).to eq({msg: 'Already voted'}.to_json)
+        expect(user.get_up_voted(Challenge).first).to eq(challenge)
       end
     end
   end

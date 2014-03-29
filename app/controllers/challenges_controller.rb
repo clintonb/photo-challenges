@@ -1,10 +1,11 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :set_challenge, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /challenges
   # GET /challenges.json
   def index
+    @voted = current_user ? current_user.get_up_voted(Challenge).pluck(:id) : []
     @challenges = Challenge.all.includes(:user)
   end
 
@@ -63,14 +64,19 @@ class ChallengesController < ApplicationController
   #  end
   #end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_challenge
-      @challenge = Challenge.includes(:user).find(params[:id])
-    end
+  def vote
+    @challenge.liked_by current_user
+    render json: {msg: @challenge.vote_registered? ? 'Vote registered' : 'Already voted'}
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def challenge_params
-      params.require(:challenge).permit(:description)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_challenge
+    @challenge = Challenge.includes(:user).find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def challenge_params
+    params.require(:challenge).permit(:description)
+  end
 end
