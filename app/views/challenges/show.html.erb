@@ -3,23 +3,15 @@
 <div class="jumbotron">
   <h1>Challenge #<%= @challenge.id %></h1>
 
-  <div class="text-muted margin-bottom-large">Submitted by <%= @challenge.user.display_name %></div>
+  <div class="margin-bottom-large text-muted">Submitted by <%= @challenge.user.display_name %> &bull; <%= pluralize @challenge.photos.count, 'Photo' %></div>
   <p><%= @challenge.description %></p>
   <% if challenge_editable(@challenge) %>
     <%= link_to 'Edit', edit_challenge_path(@challenge), :class => 'btn btn-primary', :role => 'button' %>
   <% end %>
 </div>
 
-<% if @challenge.photos.any? %>
-  <div class="row">
-    <% @challenge.photos.each do |photo| %>
-      <div class="col-xs-3">
-        <a href="#" class="thumbnail">
-          <img src="<%= photo.url %>">
-        </a>
-      </div>
-    <% end %>
-  </div>
+<% if @challenge.photos %>
+  <%= render 'photos/photos', photos: @challenge.photos %>
 <% else %>
   <div class="alert alert-info">
     No photos have been posted for this challenge.

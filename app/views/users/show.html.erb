@@ -5,13 +5,12 @@
     <%= link_to 'Edit Profile', '#', :class => 'btn btn-primary disabled', :role => 'button' %>
   </div>
   <h1><%= content_for(:title) %></h1>
+
+  <div class="text-muted">
+    Photos <span class="badge alert-success"><%= @user.photos.count %></span> &bull;
+    Proposed Challenges <span class="badge alert-info"><%= @user.challenges.count %></span> &bull;
+    Answered Challenges <span class="badge alert-danger"><%= @user.answered_challenges.count %></span>
+  </div>
 </div>
 
-<%= @user.inspect() %>
-
-<% @user.photos.each do |photo| %>
-  <%= photo.id %>
-  <img src="<%= photo.url %>">
-<% end %>
-
-<%= link_to('Link to Twitter', omniauth_authorize_path('user', 'twitter')) %>
+<%= render 'photos/photos', photos: @user.photos %>

@@ -1,7 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :data_source do
-    name {Faker::Lorem.word}
+    # Using a number instead of word to avoid unique key violations
+    name { Faker::Number.number(10).to_s() }
   end
 end

@@ -9,4 +9,5 @@ PhotoChallenge::Application.routes.draw do
   end
 
   resources :users
+  resources :photos
 end

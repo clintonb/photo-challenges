@@ -1,0 +1,13 @@
+<% title 'Recent Photos' %>
+
+<div class="page-header">
+  <h1><%= content_for(:title) %></h1>
+</div>
+
+<% if @photos %>
+  <%= render 'photos/photos', photos: @photos %>
+<% else %>
+  <div class="alert alert-info">
+    No photos have been posted.
+  </div>
+<% end %>

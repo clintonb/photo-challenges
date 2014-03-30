@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-6">
+    <%= image_tag(@photo.url, class: 'photo') %>
+  </div>
+  <div class="col-xs-6">
+    <div class="user-info">
+      <%= link_to(image_tag(@photo.user.profile_image_url), @photo.user) %>
+      <%= link_to(@photo.user.display_name, @photo.user) %>
+    </div>
+    <div class="challenge-info">
+      <div class="page-header">
+        <h2><%= 'Challenge'.pluralize(@photo.challenges.count) %></h2>
+      </div>
+      <ul>
+        <% @photo.challenges.each do |challenge| %>
+          <li><%= link_to("##{challenge.id}: #{challenge.description}", challenge) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -2,12 +2,18 @@ class User < ActiveRecord::Base
   acts_as_voter
   has_many :authentications
   has_many :photos
+  has_many :challenges
+  has_many :answered_challenges, through: :photos, source: :challenges, uniq: true
   validates :email, :presence => true
   validates :first_name, :presence => true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  def to_param
+    username || id
+  end
 
   def display_name
     username || "#{first_name} #{last_name}".strip
