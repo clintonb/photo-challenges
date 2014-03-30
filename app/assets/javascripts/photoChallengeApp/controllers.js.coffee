@@ -5,9 +5,8 @@ photoChallengeControllers.controller('ChallengeListCtrl', ['$scope', 'API', ($sc
 ]);
 
 photoChallengeControllers.controller('ChallengeDetailCtrl', ['$scope', 'API', ($scope, API) ->
-  $scope.init = (id, photos=0, votes=0, voted=false) ->
+  $scope.init = (id, votes=0, voted=false) ->
     $scope.id = id
-    $scope.photos = photos
     $scope.votes = votes
     $scope.voted = voted
 

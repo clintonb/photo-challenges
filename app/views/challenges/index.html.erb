@@ -9,7 +9,7 @@
 
 <div class="challenges">
   <% @challenges.each do |challenge| %>
-    <div class="challenge row margin-bottom" ng-controller="ChallengeDetailCtrl" ng-init="init(<%= challenge.id %>, <%= challenge.photos.count %>, <%= challenge.likes.count %>, <%= @voted.include?(challenge.id) %>)">
+    <div class="challenge row margin-bottom" ng-controller="ChallengeDetailCtrl" ng-init="init(<%= challenge.id %>, <%= challenge.likes.count %>, <%= @voted.include?(challenge.id) %>)">
       <div class="counts col-xs-2 text-center">
         <div ng-switch on="voted">
           <div ng-switch-when="true">
@@ -23,11 +23,11 @@
             </a>
           </div>
         </div>
-        {{votes}} / {{photos}}
+        {{votes}}
       </div>
       <div class="detail col-xs-10">
         <div class="description"><%= link_to challenge.description, challenge %></div>
-        <div class="text-muted small">Submitted by <%= link_to challenge.user.display_name, challenge.user %></div>
+        <div class="text-muted small">Submitted by <%= link_to challenge.user.display_name, challenge.user %> &bull; <%= pluralize challenge.photos.count, 'Photo' %></div>
       </div>
     </div>
   <% end %>
