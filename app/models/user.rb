@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :photos
   has_many :challenges
-  has_many :answered_challenges, through: :photos, source: :challenges, uniq: true
+  has_many :answered_challenges, -> { uniq }, through: :photos, source: :challenges
   validates :email, :presence => true
   validates :first_name, :presence => true
 
