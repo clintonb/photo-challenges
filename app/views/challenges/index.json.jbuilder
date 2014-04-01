@@ -7,4 +7,6 @@ json.array!(@challenges) do |challenge|
   json.user do
     json.partial! 'users/user', user: challenge.user
   end
+  json.likes challenge.likes.count
+  json.liked @voted and @voted.include?(challenge.id)
 end

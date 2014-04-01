@@ -45,12 +45,14 @@ ActiveRecord::Schema.define(version: 20140328190156) do
   add_index "challenges_photos", ["photo_id"], name: "index_challenges_photos_on_photo_id"
 
   create_table "daily_challenges", force: true do |t|
-    t.integer  "challenge_id"
+    t.integer  "challenge_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "daily_challenges", ["challenge_id"], name: "index_daily_challenges_on_challenge_id"
+  add_index "daily_challenges", ["challenge_id"], name: "uq_challenge_id", unique: true
+  add_index "daily_challenges", ["created_at"], name: "index_daily_challenges_on_created_at", unique: true
 
   create_table "data_sources", force: true do |t|
     t.string   "name",       null: false

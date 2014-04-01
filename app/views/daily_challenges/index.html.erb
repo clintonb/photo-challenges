@@ -1,0 +1,12 @@
+<% title 'Daily Challenges' %>
+
+<div class="page-header">
+  <h1><%= content_for(:title) %></h1>
+</div>
+
+<% @daily_challenges.each do |daily_challenge| %>
+  <div>
+    <%= daily_challenge.challenge.description %>
+    <%= daily_challenge.created_at %>
+  </div>
+<% end %>

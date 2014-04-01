@@ -10,3 +10,9 @@ end
 400.times.collect {
   Photo.create(url: "http://lorempixel.com/640/480/?#{rand(10000)}", user: User.offset(rand(User.count)).first, challenges: [Challenge.offset(rand(Challenge.count)).first], data_source: DataSource.where(name: 'Twitter').first, data_source_external_id: Faker::Number.number(10))
 }
+
+
+5.times.collect {
+  date = Time.now.midnight - (DailyChallenge.count).days
+  DailyChallenge.create(challenge: Challenge.offset(rand(Challenge.count)).first, created_at: date, updated_at: date)
+}
