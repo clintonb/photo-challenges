@@ -1,0 +1,7 @@
+# Create a new app at https://dev.twitter.com/ and add your own credentials.
+all:
+  twitter:
+    consumer_key: ABC123
+    consumer_secret: ABC123
+    config.oauth_token: ABC123
+    oauth_token_secret: ABC123
