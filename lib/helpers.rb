@@ -16,7 +16,7 @@ module Helpers
 
     def self.tweet_image_url(tweet)
       if tweet.media.any?
-        return tweet.media[0].media_url
+        return tweet.media[0].media_url.to_s
       end
 
       nil
