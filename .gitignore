@@ -17,5 +17,5 @@
 
 .idea
 
-config/app.yml
+config/secrets.yml
 config/database.yml
