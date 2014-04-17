@@ -46,3 +46,4 @@ end
 
 gem 'tweetstream'
 gem 'acts_as_votable'
+gem 'font-awesome-sass'

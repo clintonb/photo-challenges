@@ -7,7 +7,7 @@
     by <%= @challenge.user.display_name %> &bull; <%= pluralize @challenge.photos.count, 'Photo' %></div>
   <% if @challenge.daily_challenge %>
     <p>
-    <div class="badge alert-warning"><span class="glyphicon glyphicon-star"></span> Daily Challenge
+    <div class="badge alert-warning"><%= icon('star') %> Daily Challenge
       for <%= @challenge.daily_challenge.created_at.strftime('%Y %b %d') %></div>
     </p>
   <% end %>

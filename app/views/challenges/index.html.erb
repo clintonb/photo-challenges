@@ -14,12 +14,12 @@
         <div ng-switch on="voted">
           <div ng-switch-when="true">
             <a class="vote-link voted">
-              <span class="glyphicon glyphicon-chevron-up"></span>
+              <%= icon('chevron-up') %>
             </a>
           </div>
           <div ng-switch-default>
             <a class="vote-link" href="" ng-click="vote()">
-              <span class="glyphicon glyphicon-chevron-up"></span>
+              <%= icon('chevron-up') %>
             </a>
           </div>
         </div>
