@@ -215,6 +215,7 @@ DEPENDENCIES
   omniauth
   omniauth-twitter
   rails (~> 4.1.0)
+  rake
   rspec-rails (~> 2.14.2)
   sass-rails (~> 4.0.3)
   sdoc

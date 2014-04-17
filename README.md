@@ -1,6 +1,8 @@
 Photo Challenges
 ================
 
+[![Build Status](https://travis-ci.org/clintonb/photo-challenges.svg?branch=master)](https://travis-ci.org/clintonb/photo-challenges)
+
 This project is very similar to dailyshoot.com. Each day a new shoot idea is posted. Users submit their photos by tagging them on certain social networks (e.g. Twitter, Instagram, Flickr). This project differs from dailyshoot.com by allowing users to submit and vote on ideas, and allowing voting on the photos.
 
 
