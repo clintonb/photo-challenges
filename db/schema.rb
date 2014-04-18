@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140328190156) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
-  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id"
+  add_index "authentications", ["provider", "uid"], name: "index_authentications_on_provider_and_uid", using: :btree
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "challenges", force: true do |t|
     t.string   "description", null: false
@@ -33,16 +36,16 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "challenges", ["user_id"], name: "index_challenges_on_user_id"
+  add_index "challenges", ["user_id"], name: "index_challenges_on_user_id", using: :btree
 
   create_table "challenges_photos", force: true do |t|
     t.integer "challenge_id"
     t.integer "photo_id"
   end
 
-  add_index "challenges_photos", ["challenge_id", "photo_id"], name: "index_challenges_photos_on_challenge_id_and_photo_id", unique: true
-  add_index "challenges_photos", ["challenge_id"], name: "index_challenges_photos_on_challenge_id"
-  add_index "challenges_photos", ["photo_id"], name: "index_challenges_photos_on_photo_id"
+  add_index "challenges_photos", ["challenge_id", "photo_id"], name: "index_challenges_photos_on_challenge_id_and_photo_id", unique: true, using: :btree
+  add_index "challenges_photos", ["challenge_id"], name: "index_challenges_photos_on_challenge_id", using: :btree
+  add_index "challenges_photos", ["photo_id"], name: "index_challenges_photos_on_photo_id", using: :btree
 
   create_table "daily_challenges", force: true do |t|
     t.integer  "challenge_id", null: false
@@ -50,9 +53,9 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "daily_challenges", ["challenge_id"], name: "index_daily_challenges_on_challenge_id"
-  add_index "daily_challenges", ["challenge_id"], name: "uq_challenge_id", unique: true
-  add_index "daily_challenges", ["created_at"], name: "index_daily_challenges_on_created_at", unique: true
+  add_index "daily_challenges", ["challenge_id"], name: "index_daily_challenges_on_challenge_id", using: :btree
+  add_index "daily_challenges", ["challenge_id"], name: "uq_challenge_id", unique: true, using: :btree
+  add_index "daily_challenges", ["created_at"], name: "index_daily_challenges_on_created_at", unique: true, using: :btree
 
   create_table "data_sources", force: true do |t|
     t.string   "name",       null: false
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "data_sources", ["name"], name: "index_data_sources_on_name", unique: true
+  add_index "data_sources", ["name"], name: "index_data_sources_on_name", unique: true, using: :btree
 
   create_table "photos", force: true do |t|
     t.integer  "user_id",                 null: false
@@ -71,9 +74,9 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "photos", ["data_source_id", "data_source_external_id"], name: "index_photos_on_data_source_id_and_data_source_external_id", unique: true
-  add_index "photos", ["data_source_id"], name: "index_photos_on_data_source_id"
-  add_index "photos", ["user_id"], name: "index_photos_on_user_id"
+  add_index "photos", ["data_source_id", "data_source_external_id"], name: "index_photos_on_data_source_id_and_data_source_external_id", unique: true, using: :btree
+  add_index "photos", ["data_source_id"], name: "index_photos_on_data_source_id", using: :btree
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",             default: "", null: false
@@ -93,9 +96,9 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"
@@ -109,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140328190156) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end
