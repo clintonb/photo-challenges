@@ -1,13 +1,19 @@
 language: ruby
 cache: bundler
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 rvm:
-  - 2.0.0
+- 2.0.0
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - cp config/secrets.travis.yml config/secrets.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.travis.yml config/database.yml
+- cp config/secrets.travis.yml config/secrets.yml
+- psql -c 'create database travis_ci_test;' -U postgres
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate
-  - bundle exec rspec spec/
+- RAILS_ENV=test bundle exec rake db:migrate
+- bundle exec rspec spec/
+env:
+  global:
+  - secure: OJYFKFYqsS9dMdzRBVySKBUiOVJsC6dJeLk8rdaQO9Z8FspBWSwd8cRJsBDsoo8Ah7KBbVIwsj2C+xCs09ab+V0izIo8ttJh3/LOpOh9FHWbxiXF9ZR9oAsaFnJK5UzM+YghlCgAP8bBFYjJwHHndqNOBO4AsZHDbIiGrO/Q3SY=
+  - secure: YkBViJxdt5RaEEAizGufv+lZCi81yQWZbdD4h8KNkrrdXbY6Ulkd8TNJO+ekLrptRSFgflaH6cAT084XzXeCi6B+be/RK/ddUHgIE9SlfcvOsqjLe9f1lzqKY3Xtt8iUomhHZujio7ryIOiMuquDRE+9khMUsjNZSN2wjlppyO8=
+  - secure: hqjtTLVgVEU5JWx5U39h42KS8Tdbo0bSEjs3kYjCMoLAaJbXzkXRhRgfOMKU33wZTMABC1ujKwvJ1WPPXWGcYRJcZkiqqPc1Gw21c+iK/85DgXwODelClWQpYlDf6Jngw0DZ5hoCGgpoEhpl7h8EPBN9gfbxTF2OFg+7O9Ib8N8=
+  - secure: KkIpL5sGpi+eXL/8Pe28/tV7mXw74mQwpKDZ4P1Gz6pXtNuMmsWuir/Q8GuZD8RtMwGhnpyJhN+g8xnzCMVsLBbQzC3d3HJlu8yjG0Iw4wRrxcSOfU4uY5rlIvCjz7rHaMPaRPLOutA/RUQwh2nqB7ogiftn85SRk5pTXtCdraM=
