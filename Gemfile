@@ -49,3 +49,5 @@ gem 'tweetstream'
 gem 'acts_as_votable'
 gem 'font-awesome-sass'
 gem 'figaro'
+
+gem 'rails_12factor', group: :production
