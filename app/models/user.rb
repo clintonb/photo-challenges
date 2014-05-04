@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   def self.find_or_create_from_tweet!(tweet)
     tweeter = tweet.user
     password = Faker::Internet.password
-    authentication = Authentication.find_by_provider_and_uid('twitter', tweeter.id)
+    authentication = Authentication.find_by_provider_and_uid('twitter', tweeter.id.to_s)
 
     if authentication
       user = authentication.user

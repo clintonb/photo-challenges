@@ -50,7 +50,7 @@ describe User do
   end
 
   describe '#find_or_create_from_tweet!' do
-    let(:twitter_user_id) { Faker::Number.number(10) }
+    let(:twitter_user_id) { Faker::Number.number(10).to_i }
     let(:name) { Faker::Name.name }
     let(:tweet) { Twitter::Tweet.new(:id => Faker::Number.number(10), :user => {:id => twitter_user_id, :id_str => twitter_user_id.to_s, :name => name}) }
     subject(:user) { User.find_or_create_from_tweet!(tweet) }
