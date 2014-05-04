@@ -165,8 +165,8 @@ describe ChallengesController do
       it 'should register a vote for the user' do
         response
 
-        expect(challenge.votes.up.by_type(User).voters.count).to eq(1)
-        expect(challenge.votes.up.by_type(User).voters.first).to eq(user)
+        expect(challenge.votes_for.up.by_type(User).voters.count).to eq(1)
+        expect(challenge.votes_for.up.by_type(User).voters.first).to eq(user)
         expect(user.get_up_voted(Challenge).first).to eq(challenge)
       end
 
@@ -174,7 +174,7 @@ describe ChallengesController do
         response
         response = put :vote, {id: challenge.to_param, format: :json}
 
-        expect(challenge.votes.up.by_type(User).voters.count).to eq(1)
+        expect(challenge.votes_for.up.by_type(User).voters.count).to eq(1)
         expect(response.body).to eq({msg: 'Already voted'}.to_json)
         expect(user.get_up_voted(Challenge).first).to eq(challenge)
       end

@@ -44,6 +44,6 @@ group :development, :test do
   gem 'rake'
 end
 
-gem 'tweetstream'
-gem 'acts_as_votable'
-gem 'font-awesome-sass'
+gem 'tweetstream', '~> 2.6.1'
+gem 'acts_as_votable', '~> 0.9.0'
+gem 'font-awesome-sass', '~> 4.0.3.1'

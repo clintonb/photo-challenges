@@ -9,7 +9,7 @@
 
 <div class="challenges">
   <% @challenges.each do |challenge| %>
-    <div class="challenge row margin-bottom" ng-controller="ChallengeDetailCtrl" ng-init="init(<%= challenge.id %>, <%= challenge.likes.count %>, <%= @voted.include?(challenge.id) %>)">
+    <div class="challenge row margin-bottom" ng-controller="ChallengeDetailCtrl" ng-init="init(<%= challenge.id %>, <%= challenge.get_likes.count %>, <%= @voted.include?(challenge.id) %>)">
       <div class="counts col-xs-2 text-center">
         <div ng-switch on="voted">
           <div ng-switch-when="true">
