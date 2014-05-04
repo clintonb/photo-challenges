@@ -81,4 +81,19 @@ describe User do
     subject(:user) { create(:user) }
     its(:profile_image_url) { should eq "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}?s=#{30}&d=mm" }
   end
+
+  describe '#to_param' do
+    let(:username) { Faker::Internet.user_name }
+    subject(:user) { create(:user, username: username) }
+
+    its(:to_param) { should eq username }
+    its(:to_param) { should be_a(String) }
+
+    context 'without username' do
+      let(:username) { nil }
+
+      its(:to_param) { should eq user.id.to_s }
+      its(:to_param) { should be_a(String) }
+    end
+  end
 end
