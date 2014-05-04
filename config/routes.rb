@@ -1,4 +1,4 @@
-PhotoChallenge::Application.routes.draw do
+PhotoChallenges::Application.routes.draw do
   root 'daily_challenges#latest'
 
   devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks', :registrations => 'registrations'}

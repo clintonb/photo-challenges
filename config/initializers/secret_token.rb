@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PhotoChallenge::Application.config.secret_key_base = '54d42122911cd23e3decee59185cec4e90a31e32b5b5042941dfd785e70d467c3c377aa52c39f5bae5ea92c913748495d9e4edbb4dc5be7ae594e6e1fabeb4bd'
+PhotoChallenges::Application.config.secret_key_base = '54d42122911cd23e3decee59185cec4e90a31e32b5b5042941dfd785e70d467c3c377aa52c39f5bae5ea92c913748495d9e4edbb4dc5be7ae594e6e1fabeb4bd'
