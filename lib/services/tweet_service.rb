@@ -1,10 +1,6 @@
-module Helpers
-  module Twitter
-    def self.get_hashtags(tweet)
-      tweet.hashtags.map { |hashtag| hashtag.text.downcase }
-    end
-
-    def self.tweet_contains_hashtags?(tweet, *hashtags)
+module Services
+  class TweetService
+    def tweet_contains_hashtags?(tweet, *hashtags)
       if hashtags and tweet.hashtags.any?
         hashtags = hashtags.reject(&:blank?).map(&:downcase)
         tweet_tags = get_hashtags(tweet)
@@ -14,23 +10,16 @@ module Helpers
       false
     end
 
-    def self.tweet_image_url(tweet)
-      if tweet.media.any?
-        return tweet.media[0].media_url.to_s
-      end
 
-      nil
-    end
-
-    def self.process_tweet(tweet)
+    def process_tweet(tweet)
       logger = Rails.logger
 
       logger.debug "Processing tweet #{tweet.id}..."
-      image_url = Helpers::Twitter::tweet_image_url(tweet)
+      image_url = tweet_image_url(tweet)
 
       if image_url
         # Get Challenges from hashtags
-        challenges = Challenge.find_by_hashtags(*Helpers::Twitter::get_hashtags(tweet))
+        challenges = Challenge.find_by_hashtags(*get_hashtags(tweet))
 
         if challenges.size > 0
           # Get or create User
@@ -56,6 +45,18 @@ module Helpers
       end
 
       nil
+    end
+
+    def tweet_image_url(tweet)
+      if tweet.media.any?
+        return tweet.media[0].media_url.to_s
+      end
+
+      nil
+    end
+
+    def get_hashtags(tweet)
+      tweet.hashtags.map { |hashtag| hashtag.text.downcase }
     end
   end
 end

@@ -4,6 +4,7 @@ namespace :photofinder do
   desc 'Finds photos posted to Twitter'
   task twitter: :environment do
     logger = Rails.logger
+    tweet_service = Services::TweetService.new
 
     keywords = Challenge.hashtags
     logger.debug "Now tracking #{keywords.join(', ')}"
@@ -26,8 +27,8 @@ namespace :photofinder do
 
     client.track(keywords) do |tweet|
       begin
-        if Helpers::Twitter::tweet_contains_hashtags?(tweet, *keywords)
-          Helpers::Twitter::process_tweet(tweet)
+        if tweet_service.tweet_contains_hashtags?(tweet, *keywords)
+          tweet_service.process_tweet(tweet)
         end
         tweeter = tweet.user
         logger.debug("#{tweeter.screen_name}(#{tweeter.id})\t#{tweet.id}\t#{tweet.text}")
