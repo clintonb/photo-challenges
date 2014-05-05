@@ -15,7 +15,7 @@ describe Challenge do
   end
 
   describe '#hashtag' do
-    subject(:challenge) {create(:challenge)}
+    subject(:challenge) { create(:challenge) }
 
     it 'returns a hashtag string' do
       expect(challenge.hashtag).to eq "pc#{challenge.id}"
@@ -37,6 +37,29 @@ describe Challenge do
     it 'returns a list of Challenges matching the hashtags' do
       hashtags = Challenge.hashtags
       expect(Challenge.find_by_hashtags(*hashtags)).to match_array(challenges)
+    end
+  end
+
+  describe '#daily_challenge_date' do
+    subject(:challenge) { create(:challenge) }
+
+    it 'is set to nil' do
+      expect(challenge.daily_challenge).to be_nil
+      expect(challenge.daily_challenge_date).to be_nil
+    end
+
+
+    context 'with associated DailyChallenge' do
+      let!(:daily_challenge) { create(:daily_challenge, challenge: challenge) }
+
+      it 'is set to the value of its DailyChallenge creation time' do
+        expect(daily_challenge.challenge).to eq challenge
+        expect(daily_challenge.created_at).to_not be_nil
+        puts daily_challenge.created_at
+        puts challenge.daily_challenge_date
+        expect(challenge.daily_challenge_date).to_not be_nil
+        expect(challenge.daily_challenge_date).to eq daily_challenge.created_at
+      end
     end
   end
 end

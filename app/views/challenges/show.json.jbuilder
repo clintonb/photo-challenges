@@ -1,4 +1,4 @@
-json.extract! @challenge, :id, :created_at, :description
+json.extract! @challenge, :id, :created_at, :description, :daily_challenge_date
 json.user do
   json.partial! 'users/user', user: @challenge.user
 end
