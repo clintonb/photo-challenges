@@ -1,6 +1,6 @@
 class DailyChallengesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :latest]
-  before_action :set_daily_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :set_daily_challenge, only: [:show]
 
   def index
     @daily_challenges = DailyChallenge.all.includes(:user, :challenge)
