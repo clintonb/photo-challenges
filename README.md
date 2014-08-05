@@ -11,7 +11,7 @@ Getting Started
 
 1. The major functionality of this app--retrieving photos--relies on the Twitter API. Head over to [https://dev.twitter.com/](https://dev.twitter.com/), create a new app, and add your credentials to config/app.yml. See app.yml.sample for an example of how the file should be structured.
 
-2. Create config/database.yml. Use database.yml.sample as an example. If you want to use a database other than SQLite (which you definitely do for production), make the appropriate changes. 
+2. Create config/database.yml. Use database.yml.sample as an example.
 
 3. Run the following commands to initialize your database:
 
