@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  # Disable CSRF protection
+  skip_before_action :verify_authenticity_token
 
-  after_filter :set_csrf_cookie_for_ng
+  # JSON is needed so that consumers can get info for the current user.
+  respond_to :html, :json
 
-  def set_csrf_cookie_for_ng
-    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || '/'
   end
 
   protected

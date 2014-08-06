@@ -1,0 +1,23 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a class="btn btn-primary" role="button" href="#/challenges/new">Create New Challenge</a>
+  </div>
+  <h1>Challenges</h1>
+</div>
+
+<div class="challenges">
+  <div ng-repeat="challenge in challenges" class="challenge row margin-bottom" ng-controller="ChallengeDetailCtrl" ng-init="init(challenge)">
+    <div class="counts col-xs-2 text-center">
+      <a class="vote-link" ng-click="vote(challenge.id)">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+      {{challenge.likes}}
+    </div>
+    <div class="detail col-xs-10">
+
+      <div class="description"><a href="#/challenges/{{challenge.id}}">{{challenge.description}}</a></div>
+      <div class="text-muted small">Submitted by <a href="#/users/{{challenge.user.id}}">{{challenge.user.display_name}}</a> &bull; <ng-pluralize count="challenge.photos.count" when="{'one': '1 photo', 'other': '{} photos'}"></ng-pluralize>
+      </div>
+    </div>
+  </div>
+</div>

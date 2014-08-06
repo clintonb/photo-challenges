@@ -26,10 +26,10 @@ describe OmniauthCallbacksController do
           sign_in(:user, user)
         end
 
-        it { should redirect_to root_path }
+        it { should redirect_to '/' }
 
         context 'not authenticated' do
-          it { should redirect_to root_path }
+          it { should redirect_to '/' }
 
           it 'should add a twitter authentication for the user' do
             response
@@ -46,7 +46,7 @@ describe OmniauthCallbacksController do
 
       context 'logged out but authenticated' do
         let!(:user) { create(:authentication, provider: 'twitter', uid: twitter_user_id).user }
-        it { should redirect_to root_path }
+        it { should redirect_to '/' }
       end
     end
 

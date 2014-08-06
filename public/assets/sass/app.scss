@@ -1,0 +1,33 @@
+@import "lazy";
+@import "variables";
+@import "mixins";
+@import "footer";
+
+.nav {
+  img.avatar {
+    max-height: 18px;
+  }
+}
+
+.challenges {
+  .challenge {
+
+    .counts {
+      .vote-link {
+        color: inherit;
+        display: block;
+
+        &.voted {
+          color: #d9534f;
+        }
+      }
+    }
+
+    .detail {
+    }
+  }
+}
+
+img.photo {
+  max-width: 100%;
+}

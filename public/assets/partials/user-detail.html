@@ -1,0 +1,14 @@
+<div class="page-header">
+  <div class="pull-right">
+    <a href="#" class="btn btn-primary disabled" data-role="button">Edit Profile</a>
+  </div>
+  <h1>{{ user.display_name }}</h1>
+
+  <div class="text-muted">
+    Photos <span class="badge alert-success">{{ user.counts.photos }}</span> &bull;
+    Proposed Challenges <span class="badge alert-info">{{ user.counts.challenges }}</span> &bull;
+    Answered Challenges <span class="badge alert-danger">{{ user.counts.answered_challenges }}</span>
+  </div>
+</div>
+
+<photo-grid photos="user.photos.links"></photo-grid>

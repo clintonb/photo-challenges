@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-6">
+    <img ng-src="{{photo.url}}" class="photo">
+  </div>
+  <div class="col-xs-6">
+    <div class="user-info">
+      <a href="#/users/{{photo.user.id}}"><img ng-src="{{photo.user.profile_image_url}}"></a>
+      <a href="#/users/{{photo.user.id}}">{{photo.user.display_name}}</a>
+    </div>
+    <div class="challenge-info">
+      <div class="page-header">
+        <h2>Challenges</h2>
+      </div>
+      <ul>
+        <li ng-repeat="challenge in photo.challenges"><a href="#/challenges/{{challenge.id}}">#{{challenge.id}}: {{challenge.description}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

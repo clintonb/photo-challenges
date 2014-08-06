@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Daily Challenges</h1>
+</div>
+
+<div class="daily-challenges">
+  <div ng-repeat="daily_challenge in daily_challenges | orderBy: -created_at" class="daily-challenge row margin-bottom">
+    <div class="counts col-xs-2 text-center">
+      {{daily_challenge.created_at | date: 'yyyy MMM dd'}}
+    </div>
+    <div class="detail col-xs-10">
+
+      <div class="description"><a href="#/challenges/{{daily_challenge.challenge.id}}">{{daily_challenge.challenge.description}}</a></div>
+      <div class="text-muted small">Submitted by <a href="#/users/{{daily_challenge.challenge.user.id}}">{{daily_challenge.challenge.user.display_name}}</a> &bull; <ng-pluralize count="daily_challenge.challenge.photos.count" when="{'one': '1 photo', 'other': '{} photos'}"></ng-pluralize>
+      </div>
+    </div>
+  </div>
+</div>

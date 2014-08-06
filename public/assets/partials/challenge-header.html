@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h1>Challenge #{{challenge.id}}</h1>
+
+  <div class="margin-bottom-large text-muted">Submitted
+    by <a href="#/users/{{challenge.user.id}}" class="submitter">{{challenge.user.display_name}}</a> &bull;
+    <span class="photo-count"><ng-pluralize count="challenge.photos.count" when="{'one': '1 photo', 'other': '{} photos'}"></ng-pluralize></span>
+  </div>
+  <div ng-if="challenge.daily_challenge_date">
+    <div class="badge alert-warning"><i class="fa fa-star"></i> Daily Challenge for
+      <span class="daily-challenge-date">{{challenge.daily_challenge_date | date: 'yyyy MMM dd'}}</span>
+    </div>
+  </div>
+
+  <p class="description">{{challenge.description}}</p>
+</div>

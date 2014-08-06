@@ -20,6 +20,11 @@ Getting Started
 
 4. *(Optional)* Add a few fake users, challenges, and photos to your database by running `bin/rake db:seed`.
 
+5. Get the front-end requirements:
+
+        $ npm install
+        $ rake photo_challenges:compile_sass
+
 5. Start the web server with `rails s`.
 
 6. In another console window start the Twitter photo finder with `bin/rake photofinder:twitter`.
@@ -27,12 +32,23 @@ Getting Started
 That's it for getting the server running. The site should now be available at http://localhost:3000 (unless you changed the port).
 
 
-Running Tests
--------------
+Running Rails Tests
+-------------------
 
         $ bin/rake db:migrate RAILS_ENV=test
         $ bin/rake spec
 
+
+Running Javascript Tests
+------------------------
+
+Use the command below to continuously run the tests with every change to the Javascript source code.
+
+        $ npm test
+        
+Just need to run the tests once? There's a command for that, too.
+
+        $ npm run-script test-single-run
 
 Using the Application
 ---------------------

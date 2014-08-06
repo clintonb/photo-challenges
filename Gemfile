@@ -47,3 +47,4 @@ end
 gem 'tweetstream', '~> 2.6.1'
 gem 'acts_as_votable', '~> 0.9.0'
 gem 'font-awesome-sass', '~> 4.0.3.1'
+gem 'rack-cors', '~> 0.2.9'
