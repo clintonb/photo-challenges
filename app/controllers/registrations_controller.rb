@@ -15,8 +15,6 @@ class RegistrationsController < Devise::RegistrationsController
     super
     omni = session[:omniauth]
     if omni
-      @user.first_name = session[:extra][:first_name]
-      @user.username = session[:extra][:username]
       @user.apply_omniauth(omni)
       @user.valid?
     end

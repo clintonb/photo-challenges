@@ -27,6 +27,13 @@ Getting Started
 That's it for getting the server running. The site should now be available at http://localhost:3000 (unless you changed the port).
 
 
+Running Tests
+-------------
+
+        $ bin/rake db:migrate RAILS_ENV=test
+        $ bin/rake spec
+
+
 Using the Application
 ---------------------
 

@@ -55,8 +55,6 @@ describe Challenge do
       it 'is set to the value of its DailyChallenge creation time' do
         expect(daily_challenge.challenge).to eq challenge
         expect(daily_challenge.created_at).to_not be_nil
-        puts daily_challenge.created_at
-        puts challenge.daily_challenge_date
         expect(challenge.daily_challenge_date).to_not be_nil
         expect(challenge.daily_challenge_date).to eq daily_challenge.created_at
       end

@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :challenges
   has_many :answered_challenges, -> { uniq }, through: :photos, source: :challenges
-  validates :email, :presence => true
   validates :first_name, :presence => true
+  validates :username, :uniqueness => true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
